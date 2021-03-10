@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Attendance</string>
+    <string name="Welcome">Welcome!</string>
+    <string name="Hello">Hello There!</string>
+    <string name="hintusername">Username</string>
+    <string name="hintpassword">Password</string>
+    <string name="forget">Forgot password</string>
+    <string name="Remember">Remember</string>
+    <string name="help">Help???</string>
+    <string name="login">Login</string>
+    <string name="mycourses">My Courses</string>
+    <string name="hintCodeCourse">subject code</string>
+    <string name="btnJoinCourse">Join</string>
+    <string name="tutorial_Join_Course">Click the Join button to join the Course</string>
+
+    <string name="txt_register">Register</string>
+    <string name="txt_sign_in">Sign in</string>
+    <string name="hintusercode">User code</string>
+    <string name="hintname">Your Name</string>
+    <string name="hintmail">Email</string>
+    <string name="hintmajor">Major</string>
+    <string name="rbtnstudent">Student</string>
+    <string name="rbtnlecturer">Lecturer</string>
+    <string name="txtaccept">Accept\'</string>
+    <string name="txtcancel">Cancel</string>
+    <string name="hintrename">New Usercode</string>
+    <string name="txtTitleNewCourseActivity">Course</string>
+    <string name="hintnamecourse">Name</string>
+    <string name="hintsize">"Size "</string>
+    <string name="hintlecturer">Lecturer</string>
+    <string name="hintCreateAt">Start At</string>
+    <string name="hintendat">End at</string>
+    <string name="hintkey">key</string>
+    <string name="txtcreate">Create</string>
+    <string name="hintnovalue">data cannot be left blank</string>
+    <string name="hintdate">yyyy/MM/dd</string>
+    <string name="hintlessonname">Lesson title</string>
+    <string name="ExportFile">Export file</string>
+    <string name="txtReport">Report</string>
+    <string name="title_lesson">Lesson</string>
+    <string name="title_inf_attendance">Information</string>
+    <string name="title_dialog_addlesson">Add new lesson</string>
+    <string name="title_Course">Course</string>
+</resources>

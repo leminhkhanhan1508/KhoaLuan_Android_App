@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:layout_height="match_parent">
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="@string/title_dialog_addlesson"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+    ></TextView>
+    <EditText
+            android:id="@+id/txtnamelesson"
+            android:layout_width="292dp"
+            android:layout_height="42dp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:scrollHorizontally="true"
+            android:layout_marginTop="25dp"
+            android:alpha="0.5"
+            android:background="@drawable/inputfield"
+            android:ems="10"
+
+            android:hint="@string/hintlessonname"
+    ></EditText>
+    <EditText
+            android:id="@+id/txtdate_of_lesson"
+            android:layout_width="292dp"
+            android:layout_height="42dp"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:layout_marginTop="25dp"
+            android:alpha="0.5"
+            android:background="@drawable/inputfield"
+            android:ems="10"
+
+            android:hint="@string/hintdate"
+            android:inputType="date"
+    ></EditText>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:layout_marginBottom="30dp"
+                  android:layout_marginTop="10dp"
+                  android:orientation="horizontal">
+        <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_selector_login"
+                android:text="@string/txtcancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+
+
+                android:layout_gravity="center"
+        />
+        <Button
+                android:id="@+id/btnAccept"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_selector_login"
+                android:text="@string/txtaccept"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:layout_marginLeft="20dp"
+
+                android:layout_gravity="center"
+        />
+
+
+    </LinearLayout>
+
+</LinearLayout>

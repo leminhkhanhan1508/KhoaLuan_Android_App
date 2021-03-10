@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_marginHorizontal="10dp"
+              android:layout_marginTop="10dp"
+              android:gravity="center"
+              android:layout_gravity="center"
+              android:orientation="horizontal"
+              android:background="@drawable/background_item_course"
+>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="5dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginVertical="5dp"
+                  android:orientation="vertical"
+
+                  android:layout_gravity="center"
+    >
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/txtCodeCourse"
+                  android:textColor="@color/black2"
+                  android:layout_marginHorizontal="25dp"
+                  android:layout_marginBottom="3dp"
+                  android:textSize="20sp"
+        >
+        </TextView>
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/txtNameCourse"
+                  android:textColor="@color/black2"
+                  android:textStyle="bold"
+                  android:textSize="25sp"
+                  android:layout_marginBottom="25dp"
+                  android:layout_marginHorizontal="25dp">
+        </TextView>
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/txtWeek"
+                  android:textColor="@color/black2"
+                  android:text="Tuần1"
+                  android:textSize="20sp"
+                  android:layout_marginHorizontal="25dp">
+        </TextView>
+        <ProgressBar
+                android:id="@+id/progressBarWeek"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:scaleY="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.555"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="10dp"
+        />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="3dp"
+                android:layout_height="1dp"
+                android:background="@color/gray_btn_bg_color"
+
+        ></TextView>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:weightSum="1"
+                      android:layout_marginVertical="15dp"
+
+        >
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Giảng viên:"
+                      android:textColor="@color/black2"
+                      android:layout_marginLeft="25dp"
+                      android:layout_weight="0.03"
+                      android:textSize="20sp"
+            >
+            </TextView>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/txtLecturer"
+                      android:textColor="@color/black2"
+                      android:layout_weight="0.5"
+                      android:textSize="20sp"
+            >
+            </TextView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
