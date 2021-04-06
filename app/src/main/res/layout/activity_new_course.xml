@@ -6,158 +6,265 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/background_2"
+        android:background="@color/white"
         tools:context=".Activity.NewCourseActivity">
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_marginTop="10dp"
+                  android:layout_marginTop="20dp"
                   android:gravity="center"
                   android:orientation="horizontal">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textSize="50dp"
-                  android:textColor="@color/field"
+                  android:textStyle="bold"
+                  android:textColor="@color/black"
                   android:text="@string/txtTitleNewCourseActivity"
                   android:id="@+id/txtRegister"
         ></TextView>
 
     </LinearLayout>
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="490dp">
+                android:layout_height="wrap_content">
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:layout_marginTop="20dp"
                       android:layout_marginBottom="30dp"
                       android:gravity="center"
                       android:orientation="vertical">
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginBottom="15dp"
+                          android:orientation="vertical"
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_coursecode"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtCodeCourse"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintCodeCourse"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
 
-            <EditText
-                    android:id="@+id/txtCodeCourse"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintCodeCourse"
-                    android:inputType="text"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtCourseName"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintnamecourse"
-                    android:inputType="text"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtSize"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintsize"
-                    android:inputType="number"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtMajorCode"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintmajor"
-                    android:inputType="text"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtLecturer"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintlecturer"
-                    android:inputType="text"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtKeyCourse"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintkey"
-                    android:inputType="text"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtStartAt"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintCreateAt"
-                    android:inputType="text"
-            ></EditText>
-            <EditText
-                    android:id="@+id/txtEndAt"
-                    android:layout_width="292dp"
-                    android:layout_height="42dp"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:layout_marginTop="25dp"
-                    android:alpha="0.5"
-                    android:background="@drawable/inputfield"
-                    android:ems="10"
-                    android:layout_marginBottom="90dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/hintendat"
-                    android:inputType="text"
-            ></EditText>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_coursename"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtCourseName"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintnamecourse"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_size"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtSize"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintsize"
+                        android:inputType="number"
+                ></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_major"
+                ></TextView>
+
+                <EditText
+                        android:id="@+id/txtMajorCode"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintmajor"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_lecturer"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtLecturer"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintlecturer"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_keycode"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtKeyCourse"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintkey"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_StartAt"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtStartAt"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintCreateAt"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginBottom="15dp"
+
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="10dp"
+                          android:textColor="@android:color/holo_red_light"
+                          android:id="@+id/notification_no_EndAt"
+                ></TextView>
+                <EditText
+                        android:id="@+id/txtEndAt"
+                        android:layout_width="292dp"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:alpha="0.5"
+                        android:background="@drawable/inputfield"
+                        android:ems="10"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:hint="@string/hintendat"
+                        android:inputType="text"
+                ></EditText>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+            <Button
+                    android:id="@+id/btnCreate"
+                    android:layout_width="250dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_dialog"
+                    android:text="@string/txtcreate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+android:layout_marginBottom="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+            />
         </LinearLayout>
-    </ScrollView>
-    <Button
-            android:id="@+id/btnCreate"
-            android:layout_width="200dp"
-            android:layout_height="48dp"
-            android:background="@drawable/button_selector_login"
-            android:text="@string/txtcreate"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="19sp"
 
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center"
-    />
+    </ScrollView>
+
 
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.example.attendence.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.attendence.R;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -14,11 +16,27 @@ public class CameraScanActivity extends AppCompatActivity implements BarcodeRead
     private BarcodeReader barcodeReader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Camera Scaner");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_scan);
         barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_scanner);
 
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                onBackPressed();
+                break;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void onScanned(Barcode barcode) {

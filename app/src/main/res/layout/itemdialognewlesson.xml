@@ -47,32 +47,35 @@
                   android:layout_height="wrap_content"
                   android:layout_gravity="center"
                   android:gravity="center"
+                  android:weightSum="1"
                   android:layout_marginBottom="30dp"
-                  android:layout_marginTop="10dp"
+                  android:layout_marginTop="20dp"
                   android:orientation="horizontal">
         <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:background="@drawable/button_selector_login"
+                android:background="@drawable/button_dialog"
                 android:text="@string/txtcancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="19sp"
 
-
+                android:layout_weight="0.2"
                 android:layout_gravity="center"
         />
         <Button
                 android:id="@+id/btnAccept"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:background="@drawable/button_selector_login"
+                android:background="@drawable/button_dialog"
                 android:text="@string/txtaccept"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="19sp"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="0.2"
+
 
                 android:layout_gravity="center"
         />

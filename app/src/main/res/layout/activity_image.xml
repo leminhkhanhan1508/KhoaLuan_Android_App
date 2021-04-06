@@ -1,67 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/background_2"
+
+        android:background="@color/white"
         tools:context=".Activity.ImageActivity">
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/txtcodecourse"
-                  android:gravity="center"
-                  android:textSize="30dp"
-                  android:textColor="@color/white"
-
-        ></TextView>
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/txtcodestudent"
-                  android:gravity="center"
-                  android:textSize="30dp"
-                  android:textColor="@color/white"
-
-        ></TextView>
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/txtdate_of_lesson"
-                  android:gravity="center"
-                  android:textSize="30dp"
-                  android:textColor="@color/white"
-
-        ></TextView>
-
-    </LinearLayout>
 
 
     <GridView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:numColumns="3"
-            android:gravity="center"
+
             android:scrollbars="vertical"
-            android:layout_gravity="center"
+
             android:id="@+id/gvImage"
     ></GridView>
+    <LinearLayout android:layout_width="match_parent"
 
-    <ImageView
-            android:layout_marginTop="80dp"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_gravity="center"
-            android:paddingHorizontal="10dp"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
 
-            android:id="@+id/imgCheckImage"
-            android:background="@color/white"
+                  android:weightSum="1"
+                  android:id="@+id/layoutImage"
+    >
 
-    ></ImageView>
+        <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="3"
+                android:scaleY="3"
+                android:layout_marginTop="130dp"
+                android:id="@+id/imgCheckImage"
+                android:background="@drawable/background_image_dialog"
+
+        ></ImageView>
+       <ImageView android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:scaleX="0.3"
+                  android:scaleY="0.3"
+                  android:src="@drawable/iconcheck"
+       ></ImageView>
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

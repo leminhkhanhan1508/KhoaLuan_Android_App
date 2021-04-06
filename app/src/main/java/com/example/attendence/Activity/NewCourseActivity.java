@@ -4,10 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,9 +23,13 @@ import java.util.Locale;
 
 public class NewCourseActivity extends AppCompatActivity {
     EditText txtUserCode, txtCourseCode, txtName, txtSize, txtMajor, txtLecturer, txtStartAt, txtEndAt, txtKey;
+    TextView txt_notification_no_coursecode, txt_notification_no_coursename,
+            txt_notification_no_size, txt_notification_no_major,
+            txt_notification_no_lecturer, txt_notification_no_StartAt,
+            txt_notification_no_EndAt, txt_notification_no_Key;
     Button btnCreate;
     String userCode;
-   private ActionBar actionBar;
+    private ActionBar actionBar;
     Calendar calendar = Calendar.getInstance();
     java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -47,11 +48,53 @@ public class NewCourseActivity extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (txtCourseCode.getText().toString().equals("")) {
+
+                    txt_notification_no_coursecode.setText("***Enter information");
+
+                }
+                if (txtName.getText().toString().equals("")) {
+
+                    txt_notification_no_coursename.setText("***Enter information");
+
+                }
+                if (txtSize.getText().toString().equals("")) {
+
+                    txt_notification_no_size.setText("***Enter information");
+
+                }
+                if (txtMajor.getText().toString().equals("")) {
+
+                    txt_notification_no_major.setText("***Enter information");
+
+                }
+                if (txtLecturer.getText().toString().equals("")) {
+
+                    txt_notification_no_lecturer.setText("***Enter information");
+
+                }
+                if (txtKey.getText().toString().equals("")) {
+
+                    txt_notification_no_Key.setText("***Enter information");
+
+                }
+                if (txtStartAt.getText().toString().equals("")) {
+
+                    txt_notification_no_StartAt.setText("***Enter information");
+
+                }
+                if (txtEndAt.getText().toString().equals("")) {
+
+                    txt_notification_no_EndAt.setText("***Enter information");
+
+                }
                 RequestNewCourse requestNewCourse = new RequestNewCourse();
                 requestNewCourse.setCodeUser(userCode);
                 requestNewCourse.setCode(txtCourseCode.getText().toString());
                 requestNewCourse.setName(txtName.getText().toString());
-                requestNewCourse.setSize(Integer.parseInt(txtSize.getText().toString()));
+                if (txtSize.getText().toString().equals("") == false) {
+                    requestNewCourse.setSize(Integer.parseInt(txtSize.getText().toString()));
+                }
                 requestNewCourse.setCodeMajor(txtMajor.getText().toString());
                 requestNewCourse.setLecturer(txtLecturer.getText().toString());
                 requestNewCourse.setStart(txtStartAt.getText().toString());
@@ -66,6 +109,8 @@ public class NewCourseActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
                         if (response.code() == 200) {
                             Toast.makeText(NewCourseActivity.this, response.body().getMassage(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Log.d("Lỗi ", "Lỗi");
                         }
                     }
 
@@ -116,6 +161,14 @@ public class NewCourseActivity extends AppCompatActivity {
     }
 
     private void addControl() {
+        txt_notification_no_coursecode = findViewById(R.id.notification_no_coursecode);
+        txt_notification_no_coursename = findViewById(R.id.notification_no_coursename);
+        txt_notification_no_size = findViewById(R.id.notification_no_size);
+        txt_notification_no_major = findViewById(R.id.notification_no_major);
+        txt_notification_no_lecturer = findViewById(R.id.notification_no_lecturer);
+        txt_notification_no_Key = findViewById(R.id.notification_no_keycode);
+        txt_notification_no_EndAt = findViewById(R.id.notification_no_EndAt);
+        txt_notification_no_StartAt = findViewById(R.id.notification_no_StartAt);
 
         txtUserCode = findViewById(R.id.txtCodeUser);
         txtCourseCode = findViewById(R.id.txtCodeCourse);
@@ -129,9 +182,8 @@ public class NewCourseActivity extends AppCompatActivity {
         btnCreate = findViewById(R.id.btnCreate);
         SharedPreferences prefs = getSharedPreferences("Info_User", MODE_PRIVATE);
         userCode = prefs.getString("UserCode", null);
-        actionBar=getSupportActionBar();
-        if(actionBar!=null)
-        {
+        actionBar = getSupportActionBar();
+        if (actionBar != null) {
             actionBar.hide();
         }
     }

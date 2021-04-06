@@ -15,7 +15,7 @@ public class AppServiceFactory {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.104:8000")
+                    .baseUrl("http://192.168.1.108:8000")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

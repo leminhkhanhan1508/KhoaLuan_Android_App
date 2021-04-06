@@ -34,7 +34,7 @@ public class LessonActivity extends AppCompatActivity {
     ListView lvLesson;
     ArrayList<Lesson> listLesson;
     AdapterLesson adapterLesson;
-    TextView txtNameCourse, txtCodeourse;
+    TextView txtNameCourse;
     String codeCourse, userCode;
     ArrayList<ResponseImage> listUrl;
 
@@ -55,12 +55,6 @@ public class LessonActivity extends AppCompatActivity {
         addEvents();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_lesson_actitivy, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -69,14 +63,7 @@ public class LessonActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             }
-            case R.id.mnuexport: {
-                ExportFile();
-                break;
-            }
-            case R.id.mnuadd: {
-                NewLesson();
-                break;
-            }
+
 
         }
         return super.onOptionsItemSelected(item);
@@ -84,7 +71,7 @@ public class LessonActivity extends AppCompatActivity {
 
     private void ExportFile() {
         final RequestInfoCourse requestInfoCourse = new RequestInfoCourse();
-        requestInfoCourse.setCodeCourse(txtCodeourse.getText().toString());
+        requestInfoCourse.setCodeCourse(codeCourse);
         AppServiceFactory.getInstance();
         Call<List<ResponseInfoLesson>> GetInfoCourse = AppServiceFactory.getAppService().GetInfoCourse(requestInfoCourse);
         GetInfoCourse.enqueue(new Callback<List<ResponseInfoLesson>>() {
@@ -153,7 +140,7 @@ public class LessonActivity extends AppCompatActivity {
                             listUrl.addAll(response.body());
 
                             intentLesson.putExtra("listUrl", listUrl);
-                            Log.d("Listurl", String.valueOf(listUrl.size()));
+
                             startActivity(intentLesson);
 
                         }
@@ -267,11 +254,7 @@ public class LessonActivity extends AppCompatActivity {
     }
 
     private void addControls() {
-        actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.title_lesson);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
         lvLesson = findViewById(R.id.lv_mylessons);
         listLesson = new ArrayList<>();
         adapterLesson = new AdapterLesson(LessonActivity.this, R.layout.item_mylesssons, listLesson);
@@ -279,16 +262,46 @@ public class LessonActivity extends AppCompatActivity {
         Intent intentCourse = getIntent();
         listLesson.addAll((Collection<? extends Lesson>) intentCourse.getSerializableExtra("listLesson"));
         adapterLesson.notifyDataSetChanged();
-        txtNameCourse = findViewById(R.id.txtnamecourse);
-        txtCodeourse = findViewById(R.id.txtcodecourse);
-        txtNameCourse.setText(intentCourse.getStringExtra("nameCourse"));
-        txtCodeourse.setText(intentCourse.getStringExtra("codeCourse"));
+//        txtNameCourse = findViewById(R.id.txtnamecourse);
+
+//        txtNameCourse.setText(intentCourse.getStringExtra("nameCourse"));
+
         codeCourse = intentCourse.getStringExtra("codeCourse");
         SharedPreferences prefs = getSharedPreferences("Info_User", MODE_PRIVATE);
         userCode = prefs.getString("UserCode", null);
+        String user_Type = prefs.getString("UserType", null);
+        if(user_Type.equals("lecturer"))
+        {
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            getSupportActionBar().setCustomView(R.layout.custom_actionbar_lesson_activity);
+            View view_actionbar_lesson = getSupportActionBar().getCustomView();
+            TextView txtTitle=view_actionbar_lesson.findViewById(R.id.txtTitleActionbar);
+            ImageView imgAdd=view_actionbar_lesson.findViewById(R.id.img_add);
+            ImageView imgExport=view_actionbar_lesson.findViewById(R.id.imgExport);
+            txtTitle.setText(codeCourse);
+            imgAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NewLesson();
+                }
+            });
+            imgExport.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ExportFile();
+                }
+            });
+        }
+        else {
+            getSupportActionBar().setTitle(codeCourse);
+        }
         listUrl = new ArrayList<>();
 //        btnNewLesson = findViewById(R.id.fablesson);
+        actionBar = getSupportActionBar();
+        if (actionBar != null) {
 
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 }

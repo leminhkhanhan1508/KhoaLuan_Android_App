@@ -5,8 +5,25 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_2"
+        android:background="@color/white"
         tools:context=".Activity.LoginActivity">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:gravity="center"
+                  android:layout_marginTop="20dp"
+                  app:layout_constraintTop_toTopOf="parent">
+        <ImageView android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/imgLogo"
+                   android:scaleX="0.5"
+                   android:scaleY="0.5"
+
+                   android:src="@drawable/logouit"
+                  ></ImageView>
+    </LinearLayout>
+
+
     <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -18,7 +35,7 @@
             android:textColor="@color/black"
             android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
             android:id="@+id/txtUserName"
@@ -33,7 +50,7 @@
             android:inputType="textPersonName"
             android:textColorHint="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
 
     <EditText
             android:id="@+id/txtPassword"
@@ -48,7 +65,7 @@
             android:inputType="textPassword"
             android:textColorHint="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtUserName" />
+            app:layout_constraintTop_toBottomOf="@+id/txtUserName"/>
 
     <Button
             android:id="@+id/btn_Login"
@@ -62,7 +79,7 @@
             android:textColor="@color/white"
             android:textSize="19sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword"/>
 
     <TextView
             android:id="@+id/textView4"
@@ -74,7 +91,7 @@
             android:textColor="@color/colorAccentDark"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/btn_Login"
-            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword"/>
 
     <TextView
             android:id="@+id/textView5"
@@ -89,7 +106,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_Login"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"/>
 
 
     <CheckBox
@@ -102,7 +119,7 @@
             android:textColor="@color/colorAccentDark"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Login"/>
 
     <TextView
             android:id="@+id/tv_FogotPassword_log"
@@ -114,5 +131,5 @@
             android:textColor="@color/colorAccentDark"
             android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@+id/cb_reme"
-            app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Login"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

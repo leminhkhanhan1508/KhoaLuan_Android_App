@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+
+              android:background="@drawable/background_item_course"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_gravity="center"
+                  android:orientation="vertical"
+                  android:layout_marginHorizontal="10dp"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="300dp"
+                   android:layout_height="200dp"
+                   android:layout_marginTop="30dp"
+                   android:layout_marginBottom="5dp"
+                   android:scaleType="fitXY"
+                   android:layout_gravity="center"
+                   android:background="@drawable/background_image_dialog"
+                   android:id="@+id/imgImageDialog"
+        ></ImageView>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:layout_marginBottom="15dp"
+
+                      android:weightSum="2"
+                      android:orientation="horizontal">
+
+
+            <Button
+                    android:id="@+id/btnReport"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_dialog"
+                    android:text="@string/txtReport"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    android:layout_weight="0.5"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+            />
+            <Button
+                    android:id="@+id/btnAccept"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_dialog"
+                    android:text="@string/txtaccept"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    android:layout_weight="0.5"
+
+                    android:layout_gravity="center"
+            />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

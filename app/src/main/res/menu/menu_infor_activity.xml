@@ -3,7 +3,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/mnuexport"
-            android:icon="@drawable/exportfile"
+            android:icon="@drawable/file"
             android:title="@string/ExportFile"
             app:showAsAction="always" />
 </menu>

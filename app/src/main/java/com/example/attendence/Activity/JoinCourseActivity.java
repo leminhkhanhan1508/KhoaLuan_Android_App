@@ -71,6 +71,7 @@ public class JoinCourseActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        getSupportActionBar().hide();
         Intent intent = getIntent();
         btnJoin = findViewById(R.id.btnJoinCourse);
 

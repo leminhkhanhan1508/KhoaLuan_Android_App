@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.attendence.Activity.LoginActivity;
+import com.example.attendence.Activity.OCR_Activity;
 import com.example.attendence.Activity.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,10 +34,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_Login);
             }
         });
+//        btn_Register.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_Register=new Intent(MainActivity.this, RegisterActivity.class);
+//                startActivity(intent_Register);
+//            }
+//        });
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_Register=new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent_Register=new Intent(MainActivity.this, OCR_Activity.class);
                 startActivity(intent_Register);
             }
         });

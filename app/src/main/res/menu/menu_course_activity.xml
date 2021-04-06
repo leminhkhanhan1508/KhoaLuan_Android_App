@@ -2,19 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/home"
-            android:title="mooyj"
-            android:icon="@drawable/icon"
-            app:exb_color="#FF8888"/>
-
+            android:id="@+id/item_courses"
+            android:enabled="true"
+            android:icon="@drawable/iconschool"
+            app:showAsAction="ifRoom"
+            android:title="Courses"/>
     <item
-            android:id="@+id/settings"
-            android:title="Hai"
-    />
+            android:id="@+id/item_profile"
+            android:enabled="true"
 
-    <item
-            android:id="@+id/bookmarks"
-            android:title="Ba"
+            android:icon="@drawable/iconprofile_while"
+            app:showAsAction="ifRoom"
+            android:title="Profile"/>
 
-            app:exb_color="#fa2 "/>
 </menu>

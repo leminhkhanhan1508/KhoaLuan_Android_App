@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:layout_marginTop="5dp"
@@ -10,4 +10,23 @@
                android:id="@+id/image"
     ></ImageView>
 
-</LinearLayout>
+    <CheckBox android:layout_width="30dp" android:layout_height="30dp"
+              android:layout_alignEnd="@id/image"
+              android:enabled="false"
+              app:buttonTint="@color/white"
+              android:id="@+id/check_attend"
+              android:layout_alignBottom="@id/image"
+              android:checked="false"></CheckBox>
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/iconexport"
+            android:id="@+id/reportview"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"
+            app:civ_border_width="0.5dp"
+            app:civ_border_color="@color/gray_btn_bg_color"
+            app:civ_circle_background_color="@color/red_btn_bg_pressed_color"
+    ></de.hdodenhof.circleimageview.CircleImageView>
+
+</RelativeLayout>
