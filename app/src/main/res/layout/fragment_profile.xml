@@ -40,7 +40,7 @@
                     app:civ_circle_background_color="@color/white"
                     android:src="@drawable/iconcamera"
                     android:id="@+id/imgchange_Avatar"
-
+                    android:visibility="invisible"
             ></de.hdodenhof.circleimageview.CircleImageView>
 
 
@@ -98,7 +98,7 @@
                       android:layout_height="wrap_content"
                       android:textSize="20dp"
                       android:textColor="@color/black"
-                      android:text="Le Minh Khanh An"
+
                       android:id="@+id/txtName"
             ></TextView>
         </LinearLayout>
@@ -130,8 +130,109 @@
                       android:textStyle="normal"
 
                       android:id="@+id/txtEmail"
-                      android:text="leminhkhanhan1508@gmail.com"
+
             ></TextView>
+        </LinearLayout>
+
+        <!--        layout password-->
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:id="@+id/itempassword"
+
+
+                      android:layout_below="@+id/item_mail"
+        >
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="10dp"
+
+                      android:background="@color/gray_btn_bg_color"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginBottom="10dp"
+            ></TextView>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="20dp"
+                          android:id="@+id/layoutsecurity"
+                          android:orientation="vertical">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:layout_height="wrap_content">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/icon_security"
+                    ></ImageView>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="@color/black"
+                              android:text="@string/hint_securityandlogin"
+                              android:textSize="20dp"
+                              android:textStyle="bold"
+                    ></TextView>
+
+                </LinearLayout>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:textSize="15dp"
+
+                          android:textStyle="normal"
+                          android:inputType="textMultiLine"
+                          android:singleLine="false"
+
+                          android:scrollHorizontally="false"
+                          android:id="@+id/txtPassword"
+                          android:text="@string/txtchangepassword"
+                ></TextView>
+
+            </LinearLayout>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:layout_marginEnd="5dp"
+                      android:background="@color/gray_btn_bg_color"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginBottom="10dp"
+            ></TextView>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="20dp"
+                          android:id="@+id/layout_Logout"
+                          android:orientation="vertical">
+
+
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal"
+                >
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/icon_logout"
+                    ></ImageView>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="@color/black"
+                              android:text="@string/hint_signout"
+                              android:textSize="20dp"
+                              android:textStyle="bold"
+                    ></TextView>
+                </LinearLayout>
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:textSize="15dp"
+
+                          android:textStyle="normal"
+                          android:inputType="textMultiLine"
+                          android:singleLine="false"
+
+                          android:scrollHorizontally="false"
+                          android:id="@+id/txtsignout"
+                          android:text="@string/txt_signout"
+                ></TextView>
+
+            </LinearLayout>
         </LinearLayout>
 
 

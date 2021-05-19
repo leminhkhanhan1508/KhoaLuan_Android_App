@@ -25,6 +25,17 @@ public class RequestRegister {
     @SerializedName("user_type")
     @Expose
     private String userType;
+    @SerializedName("avatar")
+    @Expose
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getUserName() {
         return userName;

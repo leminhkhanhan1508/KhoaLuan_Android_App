@@ -53,4 +53,10 @@ public interface AppService {
     @POST("/user/avatar/change/")
     Call<ResponseMessage> Change_Avatar(@Body Request_Change_Avatar request_change_avatar);
 
+    @POST("/account/password/change/")
+    Call<ResponseMessage> ChangePassword(@Body RequestChangePassword requestChangePassword);
+
+    @POST("/account/password/forgot/")
+    Call<ResponseMessage> ChangePassword(@Body RequestForgotPassword requestForgotPassword);
+
 }

@@ -1,5 +1,6 @@
 package com.example.attendence.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -44,7 +46,8 @@ import static android.app.Activity.RESULT_OK;
 public class Profile_Fragment extends Fragment {
     TextView txtUserCode, txtMajor, txtType, txtName, txtEmail;
     String userCode;
-    de.hdodenhof.circleimageview.CircleImageView imgAvatar,imgchange_Avatar;
+    LinearLayout layoutSecurity,layoutSignout;
+    de.hdodenhof.circleimageview.CircleImageView imgAvatar, imgchange_Avatar;
     private static final int REQUEST_IMAGE_CAPTURE = 123;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,12 +95,14 @@ public class Profile_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         imgAvatar = view.findViewById(R.id.imgAvatar);
-        imgchange_Avatar=view.findViewById(R.id.imgchange_Avatar);
+        imgchange_Avatar = view.findViewById(R.id.imgchange_Avatar);
         txtUserCode = view.findViewById(R.id.txtCodeUser);
         txtMajor = view.findViewById(R.id.txtMajor);
         txtType = view.findViewById(R.id.txt_user_type);
         txtName = view.findViewById(R.id.txtName);
         txtEmail = view.findViewById(R.id.txtEmail);
+        layoutSecurity=view.findViewById(R.id.layoutsecurity);
+        layoutSignout=view.findViewById(R.id.layout_Logout);
         SharedPreferences prefs = getActivity().getSharedPreferences("Info_User", Context.MODE_PRIVATE);
         userCode = prefs.getString("UserCode", null);
         GetInforAccount(userCode);
@@ -106,22 +111,37 @@ public class Profile_Fragment extends Fragment {
     }
 
     private void AddEvent() {
-        imgchange_Avatar.setOnClickListener(new View.OnClickListener() {
+        layoutSignout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
-//                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-//                getIntent.setType("image/*");
-                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                pickIntent.setType("image/*");
-                Intent chooserIntent = Intent.createChooser(cameraIntent, "Select Image");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-
-                startActivityForResult(chooserIntent, REQUEST_IMAGE_CAPTURE);
-
+                Intent intentLogout=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intentLogout);
             }
         });
+        layoutSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentChangePassword=new Intent(getActivity(),ChangePasswordActivity.class);
+                startActivity(intentChangePassword);
+            }
+        });
+
+//        imgchange_Avatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//
+////                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+////                getIntent.setType("image/*");
+//                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                pickIntent.setType("image/*");
+//                Intent chooserIntent = Intent.createChooser(cameraIntent, "Select Image");
+//                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+//
+//                startActivityForResult(chooserIntent, REQUEST_IMAGE_CAPTURE);
+//
+//            }
+//        });
     }
 
 
@@ -139,8 +159,7 @@ public class Profile_Fragment extends Fragment {
 
 
             } else {
-                if(data.getData()!=null)
-                {
+                if (data.getData() != null) {
                     Uri filePath = data.getData();
 
                     //Getting the Bitmap from Gallery
@@ -158,12 +177,11 @@ public class Profile_Fragment extends Fragment {
             //Setting the Bitmap to ImageView
 
 
-
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] imageBytes = baos.toByteArray();
             String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
+            Log.d("encodedImage", encodedImage);
             Request_Change_Avatar request_change_avatar = new Request_Change_Avatar();
             request_change_avatar.setImage(encodedImage);
             request_change_avatar.setUsercode(txtUserCode.getText().toString());
@@ -204,7 +222,7 @@ public class Profile_Fragment extends Fragment {
             public void run() {
                 try {
                     //load Image from listURL
-                    String image = "http://192.168.1.108:8000" + urlimage;
+                    String image = getContext().getString(R.string.URL) + urlimage;
                     //create URL of Image
                     URL url = new URL(image);
                     //create bitmap to load Image from URL
@@ -238,6 +256,7 @@ public class Profile_Fragment extends Fragment {
         AppServiceFactory.getInstance();
         Call<Response_get_inf_account> get_inf_accountCall = AppServiceFactory.getAppService().GetInfoAccount(request_get_inf_account);
         get_inf_accountCall.enqueue(new Callback<Response_get_inf_account>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<Response_get_inf_account> call, Response<Response_get_inf_account> response) {
                 try {
@@ -256,6 +275,7 @@ public class Profile_Fragment extends Fragment {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<Response_get_inf_account> call, Throwable t) {
                 Log.d("Error when call retrofit get information account", "onFailure");

@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Attendance</string>
     <string name="Welcome">Welcome!</string>
     <string name="Hello">Hello There!</string>
@@ -44,4 +45,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
+    <string name="URL">http://192.168.1.104:8000</string>
+    <string name="host">192.168.1.104</string>
+    <string name="port">3456</string>
+    <string name="hint_securityandlogin">Security and Login</string>
+    <string name="txtchangepassword">Change your password to add more security to your account</string>
+    <string name="hint_signout">Sign out</string>
+    <string name="txt_signout">Log out of attendance application</string>
+    <string name="btnChangePassword">Save Changes</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="hintCurrentPassword">Current password</string>
+    <string name="hintnewpassword">New password</string>
+    <string name="hint_re_typepassword">Re-type new password</string>
+    <string name="changepassword">Change Password</string>
+    <string name="RetsetPassword">Reset Password</string>
+    <string name="title_actionbar_resetpassword">Reset Password</string>
+    <string name="hint_txtSearch">Enter student code</string>
+    <string name="txtConnect">Connect</string>
+    <string name="txtDisconnect">Disconnect</string>
 </resources>

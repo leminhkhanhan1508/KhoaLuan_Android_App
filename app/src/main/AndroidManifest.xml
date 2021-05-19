@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
-          xmlns:tools="http://schemas.android.com/tools" package="com.example.attendence">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.attendence">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- //camera intent -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- //camera intent -->
     <uses-feature
             android:name="android.hardware.camera"
             android:required="true"/>
@@ -20,10 +21,18 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-    >
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-                  android:theme="@style/Base.Theme.AppCompat" />
+            android:theme="@style/AppTheme">
+        <activity android:name=".Activity.ScanResult_ConnectDevice">
+        </activity>
+        <activity android:name=".Activity.CameraScanConnectDivice_Activity">
+        </activity>
+        <activity android:name=".Activity.ForgotPasswordActivity">
+        </activity>
+        <activity android:name=".Activity.ChangePasswordActivity">
+        </activity>
+        <activity
+                android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".Activity.OCR_Activity">
         </activity>
         <activity android:name=".Activity.NewCourseActivity">
@@ -43,11 +52,14 @@
         <activity android:name=".Activity.LoginActivity">
         </activity>
         <activity android:name=".MainActivity">
-<!--      If you use the on-device API,
-configure your app to automatically download the ML model to the device after your app is installed from the Play Store.      -->
+
+            <!--
+If you use the on-device API,
+configure your app to automatically download the ML model to the device after your app is installed from the Play Store.
+            -->
             <meta-data
                     android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-                    android:value="ocr" />
+                    android:value="ocr"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

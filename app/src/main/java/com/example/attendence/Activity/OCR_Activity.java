@@ -1,24 +1,28 @@
 package com.example.attendence.Activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import com.example.attendence.R;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import com.example.attendence.Model.RequestRegister;
+import com.example.attendence.Model.ResponseMessage;
+import com.example.attendence.Service.AppServiceFactory;
+import com.example.attendence.databinding.ActivityOcrBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -37,57 +41,154 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
 //import com.googlecode.tesseract.android.TessBaseAPI;
 import com.theartofdev.edmodo.cropper.CropImage;
 import org.jetbrains.annotations.NotNull;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
 
 //import static com.googlecode.tesseract.android.TessBaseAPI.OEM_TESSERACT_ONLY;
 
 public class OCR_Activity extends AppCompatActivity {
-    ImageView imgStudentCard;
-    TextView txtData;
-    Button btnTake_Picture, btnDetect_Text;
-
+    //    ImageView imgStudentCard;
+//    TextView txtData;
+//    Button btnTake_Picture, btnDetect_Text;
+//
+    private ActivityOcrBinding binding;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
-
+    //
     final int CROP_PIC = 2;
     private Uri picUri;
 
     String cameraPermission[];
     String storagePermission[];
+    RequestRegister requestRegister;
+    String student_code;
+    private String image_from_student_card;
+    private static final String ALLOWED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789qwertyuiopasdfghjklzxcvbnm";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ocr);
+        binding = ActivityOcrBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+
         addControls();
         addEvents();
     }
 
+
+    private static String getRandomString(final int sizeOfRandomString) {
+        final Random random = new Random();
+        final StringBuilder sb = new StringBuilder(sizeOfRandomString);
+        for (int i = 0; i < sizeOfRandomString; ++i)
+            sb.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
+        return sb.toString();
+    }
+
+    private void RegisterAccount() {
+
+        requestRegister.setUserName(student_code);
+        requestRegister.setCodeUser(student_code);
+        requestRegister.setEmail(student_code + "@gm.uit.edu.vn");
+        requestRegister.setMajor(binding.txtMajor.getText().toString());
+//        random password for account
+        String password=getRandomString(10);
+        requestRegister.setPassword(getRandomString(10));
+
+        requestRegister.setName(binding.txtName.getText().toString());
+        String type = "student";
+        requestRegister.setAvatar(image_from_student_card);
+
+        requestRegister.setUserType(type);
+//show dialog loading until response code is 200
+        final SweetAlertDialog pDialog = new SweetAlertDialog(OCR_Activity.this, SweetAlertDialog.PROGRESS_TYPE);
+
+
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading ...");
+        pDialog.setCancelable(true);
+        pDialog.show();
+//create a  account
+        AppServiceFactory.getInstance();
+        final Call<ResponseMessage> RegisterAccount = AppServiceFactory.getAppService().Register(requestRegister);
+        RegisterAccount.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                try {
+                    if (response.code() == 200) {
+
+                        pDialog.cancel();
+                        Toast.makeText(OCR_Activity.this, response.body().getMassage().toString(), Toast.LENGTH_LONG).show();
+                        binding.txtName.setText("");
+                        binding.txtMajor.setText("");
+                    }
+                } catch (Exception e) {
+                    Log.d("Exception", e.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.d("Retrofit", "Lỗi ");
+
+
+            }
+        });
+
+
+    }
+
     private void addEvents() {
-        btnTake_Picture.setOnClickListener(new View.OnClickListener() {
+        binding.imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "oke nha ", Toast.LENGTH_LONG).show();
                 if (!checkCameraPermission()) {
                     requestCameraPermission();
                 } else {
                     pickFromGallery();
                 }
-
-
             }
         });
-        btnDetect_Text.setOnClickListener(new View.OnClickListener() {
+        binding.btnRigister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                imgStudentCard.buildDrawingCache();
-//                Bitmap bitmap = imgStudentCard.getDrawingCache();
-//                detectTextFromImage(bitmap);
 
+//                Toast.makeText(getApplicationContext(), "oke nha ", Toast.LENGTH_LONG).show();
+                RegisterAccount();
             }
         });
+//        btnTake_Picture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!checkCameraPermission()) {
+//                    requestCameraPermission();
+//                } else {
+//                    pickFromGallery();
+//                }
+//
+//
+//            }
+//        });
+//        btnDetect_Text.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                imgStudentCard.buildDrawingCache();
+////                Bitmap bitmap = imgStudentCard.getDrawingCache();
+////                detectTextFromImage(bitmap);
+//
+//            }
+//        });
     }
 
 //    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
@@ -197,11 +298,9 @@ public class OCR_Activity extends AppCompatActivity {
 
 
     private void addControls() {
-        imgStudentCard = findViewById(R.id.imgStudentCard);
-        txtData = findViewById(R.id.txtData);
-        btnTake_Picture = findViewById(R.id.btnTakePicture);
-        btnDetect_Text = findViewById(R.id.btnDetectText);
+//
 // allowing permissions of gallery and camera
+        requestRegister = new RequestRegister();
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
     }
@@ -233,88 +332,7 @@ public class OCR_Activity extends AppCompatActivity {
         requestPermissions(cameraPermission, CAMERA_REQUEST);
     }
 
-//    private void showImagePicDialog() {
-//        String options[] = {"Camera", "Gallery"};
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Pick Image From");
-//        builder.setItems(options, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                if (which == 0) {
-//                    if (!checkCameraPermission()) {
-//                        requestCameraPermission();
-//                    } else {
-//                        pickFromGallery();
-//                    }
-//                } else if (which == 1) {
-//                    if (!checkStoragePermission()) {
-//                        requestStoragePermission();
-//                    } else {
-//                        pickFromGallery();
-//                    }
-//                }
-//            }
-//        });
-//        builder.create().show();
-//    }
 
-    //    private class YourAnalyzer implements ImageAnalysis.Analyzer {
-//
-//        private int degreesToFirebaseRotation(int degrees) {
-//            switch (degrees) {
-//                case 0:
-//                    return FirebaseVisionImageMetadata.ROTATION_0;
-//                case 90:
-//                    return FirebaseVisionImageMetadata.ROTATION_90;
-//                case 180:
-//                    return FirebaseVisionImageMetadata.ROTATION_180;
-//                case 270:
-//                    return FirebaseVisionImageMetadata.ROTATION_270;
-//                default:
-//                    throw new IllegalArgumentException(
-//                            "Rotation must be 0, 90, 180, or 270.");
-//            }
-//        }
-//
-//        @Override
-//        public void analyze(@NonNull @NotNull ImageProxy imageProxy, int rotationDegrees) {
-//
-//            if (imageProxy == null || imageProxy.getImage() == null) {
-//                return;
-//            }
-//            Image mediaImage = imageProxy.getImage();
-//            int rotation = degreesToFirebaseRotation(rotationDegrees);
-//            FirebaseVisionImage image =
-//                    FirebaseVisionImage.fromMediaImage(mediaImage, rotation);
-//            detectTextFromImage(image.getBitmapForDebugging());
-//        }
-//    }
-//    private int getCameraId() {
-//        int cameraId = -1;
-//        // Search for the front facing camera
-//        int numberOfCameras = Camera.getNumberOfCameras();
-//        for (int i = 0; i < numberOfCameras; i++) {
-//            Camera.CameraInfo info = new Camera.CameraInfo();
-//            Camera.getCameraInfo(i, info);
-//            if (info.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
-//                Log.d("APP", "Camera found");
-//                cameraId = i;
-//                break;
-//            }
-//        }
-//        return cameraId;
-//    }
-
-    //take a picture from your phone's camera
-//    private void dispatchTakePictureIntent() {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        try {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        } catch (ActivityNotFoundException e) {
-//            Log.d("Error", e.getMessage());
-//            // display error state to the user
-//        }
-//    }
     // Requesting camera and gallery
     // permission if not given
     @Override
@@ -349,6 +367,7 @@ public class OCR_Activity extends AppCompatActivity {
     //Show image took at activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
@@ -362,13 +381,19 @@ public class OCR_Activity extends AppCompatActivity {
                 }
                 detectTextFromImage(bitmap);
                 DecimalFormat dtime = new DecimalFormat("#.##");
-                float x=Float.valueOf((float) (0.2/8.5));
-                float y=Float.valueOf((float) ((1.9/5.3)*bitmap.getHeight()));
-                float hight=Float.valueOf((float) ((2.7/5.3)*bitmap.getHeight()));
-                float width=Float.valueOf((float) ((2.0/8.5)*bitmap.getWidth()));
+                float x = Float.valueOf((float) (0.2 / 8.5));
+                float y = Float.valueOf((float) ((1.9 / 5.3) * bitmap.getHeight()));
+                float hight = Float.valueOf((float) ((2.7 / 5.3) * bitmap.getHeight()));
+                float width = Float.valueOf((float) ((2.0 / 8.5) * bitmap.getWidth()));
                 Bitmap resizedbitmap1;
-                resizedbitmap1 = Bitmap.createBitmap(bitmap, (int) (x*bitmap.getWidth()), (int) y, (int) width, (int) hight);
-                imgStudentCard.setImageBitmap(resizedbitmap1);
+                resizedbitmap1 = Bitmap.createBitmap(bitmap, (int) (x * bitmap.getWidth()), (int) y, (int) width, (int) hight);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                resizedbitmap1.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] imageBytes = baos.toByteArray();
+                image_from_student_card = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+
+//                imgStudentCard.setImageBitmap(resizedbitmap1);
 //                detectFaceFromImage(bitmap);
                 detectObjectFromImage(bitmap);
 
@@ -391,6 +416,7 @@ public class OCR_Activity extends AppCompatActivity {
         FirebaseVisionFaceDetector detector = FirebaseVision.getInstance()
                 .getVisionFaceDetector();
         detector.detectInImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionFace>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onSuccess(List<FirebaseVisionFace> firebaseVisionFaces) {
                 for (FirebaseVisionFace face : firebaseVisionFaces) {
@@ -398,11 +424,11 @@ public class OCR_Activity extends AppCompatActivity {
 
                     float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
                     float rotZ = face.getHeadEulerAngleZ();  // Head is tilted sideways rotZ degrees\
-                    int hight=2*(bounds.bottom- bounds.top);
-                    int width=2*(bounds.right- bounds.left);
-                    Log.d("x",String.valueOf(bounds.right));
-                    Bitmap resizedbitmap1=Bitmap.createBitmap(bitmap, 0,bounds.top-bounds.top/6,bitmap.getWidth()/4, bitmap.getHeight()/2);
-                    imgStudentCard.setImageBitmap(resizedbitmap1);
+                    int hight = 2 * (bounds.bottom - bounds.top);
+                    int width = 2 * (bounds.right - bounds.left);
+                    Log.d("x", String.valueOf(bounds.right));
+                    Bitmap resizedbitmap1 = Bitmap.createBitmap(bitmap, 0, bounds.top - bounds.top / 6, bitmap.getWidth() / 4, bitmap.getHeight() / 2);
+//                    imgStudentCard.setImageBitmap(resizedbitmap1);
                     Log.d("Head is rotated to the right rotY degrees", String.valueOf(rotY) + String.valueOf(rotZ));
                     // If landmark detection was enabled (mouth, ears, eyes, cheeks, and
                     // nose available):
@@ -433,54 +459,10 @@ public class OCR_Activity extends AppCompatActivity {
             }
         });
     }
-//    private void performCrop() {
-//        // take care of exceptions
-//        try {
-//            // call the standard crop action intent (the user device may not
-//            // support it)
-//            Intent cropIntent = new Intent("com.android.camera.action.CROP");
-//            // indicate image type and Uri
-//            cropIntent.setDataAndType(picUri, "image/*");
-//            // set crop properties
-//            cropIntent.putExtra("crop", "true");
-//            // indicate aspect of desired crop
-//            cropIntent.putExtra("aspectX", 2);
-//            cropIntent.putExtra("aspectY", 1);
-//            // indicate output X and Y
-//            cropIntent.putExtra("outputX", 256);
-//            cropIntent.putExtra("outputY", 256);
-//            // retrieve data on return
-//            cropIntent.putExtra("return-data", true);
-//            // start the activity - we handle returning in onActivityResult
-//            startActivityForResult(cropIntent, CROP_PIC);
-//        }
-//        // respond to users whose devices do not support the crop action
-//        catch (ActivityNotFoundException anfe) {
-//            Toast toast = Toast
-//                    .makeText(this, "This device doesn't support the crop action!", Toast.LENGTH_SHORT);
-//            toast.show();
-//        }
-//    }
+
 
     private void detectTextFromImage(Bitmap imageBitmap) {
-//        TessBaseAPI baseAPI = new TessBaseAPI();
-//        try {
-//            prepareLanguageDir();
 //
-//            baseAPI.init(String.valueOf(getFilesDir()), "vie");
-//
-//        } catch (Exception e) {
-//            // Logging here
-//        }
-//
-//        baseAPI.setImage(imageBitmap);
-//        String whitelist = "0123456789";
-//        baseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO_OSD);
-//        baseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, whitelist);
-//        baseAPI.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
-//        String result = baseAPI.getUTF8Text();
-//        Log.d("Environment.getRootDirectory().getPath()s",result);
-//        txtData.setText(result);
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
         FirebaseVisionTextDetector detector = FirebaseVision.getInstance()
                 .getVisionTextDetector();
@@ -511,7 +493,10 @@ public class OCR_Activity extends AppCompatActivity {
         } else {
             int a = firebaseVisionText.getBlocks().size();
             FirebaseVisionText.Block mssv = firebaseVisionText.getBlocks().get(a - 2);
-            txtData.setText(mssv.getText());
+            //student code get to student card
+            student_code = mssv.getText();
+
+            Toast.makeText(getApplicationContext(), mssv.getText(), Toast.LENGTH_LONG).show();
             int b = firebaseVisionText.getBlocks().get(a - 1).getLines().size();
             for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()) {
                 String blockText = block.getText();
@@ -557,34 +542,6 @@ public class OCR_Activity extends AppCompatActivity {
 //        }
     }
 }
-//    private void copyFile() throws IOException {
-//        // work with assets folder
-//        AssetManager assMng = getAssets();
-//        InputStream is = assMng.open("tessdata/vie.traineddata");
-//        OutputStream os = new FileOutputStream(getFilesDir() +
-//                "/tessdata/vie.traineddata");
-//        byte[] buffer = new byte[1024];
-//        int read;
-//        while ((read = is.read(buffer)) != -1) {
-//            os.write(buffer, 0, read);
-//        }
-//
-//        is.close();
-//        os.flush();
-//        os.close();
-//    }
-//
-//    private void prepareLanguageDir() throws IOException {
-//        File dir = new File(getFilesDir() + "/tessdata");
-//        Log.d("dfdsfdsgfdsgfdsfds",String.valueOf(getFilesDir()));
-//        if (!dir.exists()) {
-//            dir.mkdirs();
-//        }
-//
-//        File trainedData = new File(getFilesDir() + "/tessdata/vie.traineddata");
-//        if (!trainedData.exists()) {
-//            copyFile();
-//        }
-//    }
+
 
 

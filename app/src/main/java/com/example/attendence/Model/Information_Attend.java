@@ -8,6 +8,15 @@ public class Information_Attend  implements Serializable {
     Bitmap bitmap;
     boolean Report,Check_Attend;
     String note;
+    String studentCode;
+
+    public String getStudentCode() {
+        return studentCode;
+    }
+
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
+    }
 
     public Bitmap getBitmap() {
         return bitmap;

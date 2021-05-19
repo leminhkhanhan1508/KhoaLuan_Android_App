@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -101,6 +103,7 @@ public class ListCourse_Fragment extends Fragment {
         final ParallaxRecyclerAdapter<Course> adapter = new ParallaxRecyclerAdapter<Course>(listCourse) {
 
 
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<Course> parallaxRecyclerAdapter, int i) {
                 ((CoursesActivity.ViewHolder) viewHolder).txtcodecourse.setText(parallaxRecyclerAdapter.getData().get(i).getCode());

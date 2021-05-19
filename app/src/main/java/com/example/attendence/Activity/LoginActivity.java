@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText txtUserName,txtPassword;
+    TextView txtForgotPassword;
     ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         actionBar=getSupportActionBar();
         actionBar.hide();
+        txtForgotPassword=findViewById(R.id.tv_FogotPassword_log);
         txtUserName=findViewById(R.id.txtUserName);
         txtPassword=findViewById(R.id.txtPassword);
         btnLogin=findViewById(R.id.btn_Login);
@@ -58,6 +61,13 @@ public class LoginActivity extends AppCompatActivity {
                 pDialog.show();
 
 
+            }
+        });
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
     }

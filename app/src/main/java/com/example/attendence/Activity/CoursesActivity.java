@@ -71,9 +71,11 @@ public class CoursesActivity extends AppCompatActivity {
                         fragment = new Profile_Fragment();
 
                         loadFragment(fragment);
+
                         getSupportActionBar().setDisplayShowCustomEnabled(true);
                         getSupportActionBar().setCustomView(R.layout.custom_title_actionbar_profile);
                         View view = getSupportActionBar().getCustomView();
+
                         TextView txttitle = view.findViewById(R.id.txtTitleActionbar);
                         txttitle.setText("Profile");
 

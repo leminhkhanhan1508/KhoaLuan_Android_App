@@ -1,5 +1,6 @@
 package com.example.attendence.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -39,8 +42,12 @@ public class ImageActivity extends AppCompatActivity {
     String url;
     Bitmap imageCheck;
     String userCode;
+    String user_Type;
     ArrayList<ResponseImage> listUrl;
     ArrayList<ResponseInfoLesson> listInfo;
+    //layout scan camera
+    LinearLayout layoutScanCamera;
+    Button btnConnectScanCamera;
 
 
     ArrayList<Information_Attend> List_Info_Attend;
@@ -49,6 +56,11 @@ public class ImageActivity extends AppCompatActivity {
     LinearLayout layoutImage;
 
     ActionBar actionBar;
+
+    //    button in actionBar
+    ImageView imgback, imgSearch, imgExport;
+    TextView date;
+    EditText txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +74,6 @@ public class ImageActivity extends AppCompatActivity {
 
     }
 
-    //create button add and export file csv
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        SharedPreferences prefs = getSharedPreferences("Info_User", MODE_PRIVATE);
-        String user_Type = prefs.getString("UserType", null);
-        if(user_Type.equals("lecturer")){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_infor_activity, menu);
-        }
-
-        return super.onCreateOptionsMenu(menu);
-    }
 
     //set on click for menu
     @Override
@@ -149,9 +149,53 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        imgExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                export();
+            }
+        });
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date.setVisibility(View.GONE);
+                txtSearch.setVisibility(View.VISIBLE);
+            }
+        });
         //not image
-        if (listUrl.size() <= 0)
-            imgCheck.setImageResource(R.drawable.people);
+        if (listUrl.size() <= 0) {
+//            imgCheck.setImageResource(R.drawable.people);
+
+            if(user_Type.equals("lecturer")) {
+                layoutScanCamera.setVisibility(View.VISIBLE);
+
+                btnConnectScanCamera.setVisibility(View.VISIBLE);
+                btnConnectScanCamera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //chuyển sang màn hình scan mã QR
+                        Intent intent_CameraScan = new Intent(ImageActivity.this, CameraScanConnectDivice_Activity.class);
+                        intent_CameraScan.putExtra("CodeSubject",txtCodeCourse);
+                        if (txtCodeCourse.length() != 0) {
+                            startActivity(intent_CameraScan);
+
+                        }
+
+                        startActivity(intent_CameraScan);
+                    }
+                });
+            }
+
+
+        }
+
 //a image is loading image from ulr
 
         if (listUrl.size() == 1) {
@@ -161,18 +205,38 @@ public class ImageActivity extends AppCompatActivity {
             listUrl.clear();
 //many url
         } else {
+
             getListImage();
 
             layoutImage.setVisibility(View.INVISIBLE);
+//search when EditText Change text
+            Log.d("size", String.valueOf(List_Info_Attend.size()));
+            txtSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    bitMap_adapter.getFilter().filter(s.toString());
+                    bitMap_adapter.notifyDataSetChanged();
+
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
         }
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                String userType;
-                SharedPreferences prefs = getSharedPreferences("Info_User", MODE_PRIVATE);
-                userType = prefs.getString("UserType", null);
-                if (userType.equals("student")) {
+                Log.d("posionclick", String.valueOf(position));
+                if (user_Type.equals("student")) {
                     //create dialog to show image
                     AlertDialog.Builder imagedialog = new AlertDialog.Builder(ImageActivity.this);
                     //LayoutInflater là đọc xml layout file và chuyển đổi các thuộc tính của nó thành 1 View
@@ -303,6 +367,7 @@ public class ImageActivity extends AppCompatActivity {
                                         }
                                     }
 
+                                    @SuppressLint("LongLogTag")
                                     @Override
                                     public void onFailure(Call<ResponseMessage> call, Throwable t) {
                                         Log.d("Retrofit_Change_Info_Attendence", "Error");
@@ -333,16 +398,21 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        //define for view to set view from xml file
+        layoutScanCamera = findViewById(R.id.layout_connect_QRcamera);
+        btnConnectScanCamera=findViewById(R.id.btn_Connect_QRcamera);
+
 
 
         imgCheck = findViewById(R.id.imgCheckImage);
-        layoutImage=findViewById(R.id.layoutImage);
+        layoutImage = findViewById(R.id.layoutImage);
 
         listUrl = new ArrayList<>();
         List_Info_Attend = new ArrayList<>();
         bitMap_adapter = new BitMap_Adapter(ImageActivity.this, R.layout.item_bitmap, List_Info_Attend);
         gridView = findViewById(R.id.gvImage);
         gridView.setAdapter(bitMap_adapter);
+        gridView.setTextFilterEnabled(true);
 //        SetTitle();
         Intent intent = getIntent();
         txtCodeCourse = intent.getStringExtra("codeCourse");
@@ -355,8 +425,23 @@ public class ImageActivity extends AppCompatActivity {
 
         actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(intent.getStringExtra("date"));
-            actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setCustomView(R.layout.custom_actionbar_image_activity);
+            View view_actionbar_image = getSupportActionBar().getCustomView();
+            imgback = view_actionbar_image.findViewById(R.id.imgback);
+            imgSearch = view_actionbar_image.findViewById(R.id.imgsearch);
+            imgExport = view_actionbar_image.findViewById(R.id.imgExport);
+            date = view_actionbar_image.findViewById(R.id.txtdate_of_lesson);
+            txtSearch = view_actionbar_image.findViewById(R.id.txtSearch);
+            date.setText(txtDate);
+            SharedPreferences prefs = getSharedPreferences("Info_User", MODE_PRIVATE);
+            user_Type = prefs.getString("UserType", null);
+            if (user_Type.equals("lecturer")) {
+                imgExport.setVisibility(View.VISIBLE);
+            }
         }
 
 
@@ -368,7 +453,7 @@ public class ImageActivity extends AppCompatActivity {
             public void run() {
                 try {
                     //load Image from listURL
-                    String image = "http://192.168.1.108:8000" + urlimage;
+                    String image = getApplicationContext().getString(R.string.URL) + urlimage;
                     //create URL of Image
                     URL url = new URL(image);
                     //create bitmap to load Image from URL
@@ -403,7 +488,7 @@ public class ImageActivity extends AppCompatActivity {
                     //load Image from listURL
                     for (int i = 0; i < listUrl.size(); i++) {
                         //create URL of Image
-                        URL url = new URL("http://192.168.1.108:8000" + listUrl.get(i).getUrlImage());
+                        URL url = new URL(getApplicationContext().getString(R.string.URL) + listUrl.get(i).getUrlImage());
                         //create bitmap to load Image from URL
                         Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                         //add image in listImage
@@ -411,6 +496,7 @@ public class ImageActivity extends AppCompatActivity {
                         information_attend.setBitmap(bitmap);
                         information_attend.setCheck_Attend(listUrl.get(i).getCheckInf());
                         information_attend.setReport(listUrl.get(i).getReport());
+                        information_attend.setStudentCode(listUrl.get(i).getCodeStudent());
                         List_Info_Attend.add(information_attend);
 //                        listBitmap.add(bitmap);
                     }
