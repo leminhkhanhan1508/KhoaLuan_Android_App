@@ -8,13 +8,13 @@
     <string name="forget">Forgot password</string>
     <string name="Remember">Remember</string>
     <string name="help">Help???</string>
-    <string name="login">Login</string>
+    <string name="login">Sign in</string>
     <string name="mycourses">My Courses</string>
     <string name="hintCodeCourse">subject code</string>
     <string name="btnJoinCourse">Join</string>
     <string name="tutorial_Join_Course">Click the Join button to join the Course</string>
 
-    <string name="txt_register">Register</string>
+    <string name="txt_register">Sign up</string>
     <string name="txt_sign_in">Login</string>
     <string name="hintusercode">User code</string>
     <string name="hintname">Your Name</string>
@@ -45,8 +45,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
-    <string name="URL">http://192.168.1.104:8000</string>
-    <string name="host">192.168.1.104</string>
+    <string name="URL">https://attendanceuit.azurewebsites.net</string>
+    <string name="host">https://attendanceuit.azurewebsites.net</string>
     <string name="port">3456</string>
     <string name="hint_securityandlogin">Security and Login</string>
     <string name="txtchangepassword">Change your password to add more security to your account</string>
@@ -63,4 +63,10 @@
     <string name="hint_txtSearch">Enter student code</string>
     <string name="txtConnect">Connect</string>
     <string name="txtDisconnect">Disconnect</string>
+    <string name="txt_titleregister">Don\'t have an account?</string>
+    <string name="txt_register1">Register an account</string>
+    <string name="txt_titlelogin">Already have an account?</string>
+    <string name="txt_login">Sign in</string>
+    <string name="txt_titleRegisterActivity">Create Account</string>
+    <string name="txt_valueRegisterActivity">Register an account to be able to use the application</string>
 </resources>

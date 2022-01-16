@@ -20,7 +20,7 @@ public class AppServiceFactory {
         if (retrofit == null) {
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.104:8000")
+                    .baseUrl("https://attendanceuit.azurewebsites.net")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

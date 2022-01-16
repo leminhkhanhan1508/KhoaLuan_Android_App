@@ -18,7 +18,6 @@
                    android:id="@+id/imgLogo"
                    android:scaleX="0.5"
                    android:scaleY="0.5"
-
                    android:src="@drawable/logouit"
                   ></ImageView>
     </LinearLayout>
@@ -122,14 +121,46 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_Login"/>
 
     <TextView
-            android:id="@+id/tv_FogotPassword_log"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="27dp"
-            android:text="@string/forget"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="16dp"
-            app:layout_constraintStart_toEndOf="@+id/cb_reme"
-            app:layout_constraintTop_toBottomOf="@+id/btn_Login"/>
+        android:id="@+id/tv_FogotPassword_log"
+        android:layout_width="136dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/forget"
+        android:textColor="@color/colorAccentDark"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/cb_reme"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
+
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_FogotPassword_log"
+    app:layout_constraintBottom_toBottomOf="@+id/textView5">
+
+
+    <TextView
+        android:id="@+id/tv_titleregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_titleregister"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_register1"
+        android:textColor="@color/colorAccentDark"
+        android:textSize="16sp"
+        />
+
+</LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import com.example.attendence.MainActivity;
 import com.example.attendence.Model.Course;
 import com.example.attendence.Model.RequestLogin;
 import com.example.attendence.Model.ResponseLogin;
@@ -30,7 +32,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText txtUserName,txtPassword;
-    TextView txtForgotPassword;
+    TextView txtForgotPassword,tv_register;
     ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         txtForgotPassword=findViewById(R.id.tv_FogotPassword_log);
         txtUserName=findViewById(R.id.txtUserName);
         txtPassword=findViewById(R.id.txtPassword);
+        tv_register=findViewById(R.id.tv_register);
         btnLogin=findViewById(R.id.btn_Login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +71,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        tv_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_Register=new Intent(LoginActivity.this, OCR_Activity.class);
+                startActivity(intent_Register);
             }
         });
     }

@@ -8,22 +8,34 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.attendence.R;
 import com.google.android.gms.vision.barcode.Barcode;
-import info.androidhive.barcode.BarcodeReader;
-
 import java.util.List;
+import info.bideens.barcode.BarcodeReader;
 
 public class CameraScanActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {
     private BarcodeReader barcodeReader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Camera Scaner");
+        getSupportActionBar().setTitle("Camera Scanner");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_scan);
         barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_scanner);
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        barcodeReader.onDestroyView();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -46,7 +58,7 @@ public class CameraScanActivity extends AppCompatActivity implements BarcodeRead
 //            sendMessage(requestCode);
 
             Intent intent_ScanCamera = new Intent(CameraScanActivity.this, JoinCourseActivity.class);
-            intent_ScanCamera.putExtra("request",scannedCode);
+            intent_ScanCamera.putExtra("request", scannedCode);
             startActivity(intent_ScanCamera);
         }
     }
@@ -63,6 +75,11 @@ public class CameraScanActivity extends AppCompatActivity implements BarcodeRead
 
     @Override
     public void onScanError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCameraPermissionDenied() {
 
     }
 }

@@ -122,7 +122,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-        binding.imgstudentcard.setOnClickListener(new View.OnClickListener() {
+        binding.imgcamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Toast.makeText(getApplicationContext(), "oke nha ", Toast.LENGTH_LONG).show();
@@ -234,7 +234,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             //student code get to student card
             student_code = mssv.getText();
 
-            Toast.makeText(getApplicationContext(), mssv.getText(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), mssv.getText(), Toast.LENGTH_LONG).show();
             int b = firebaseVisionText.getBlocks().get(a - 1).getLines().size();
             for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()) {
                 String blockText = block.getText();
@@ -284,6 +284,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 detectTextFromImage(bitmap);
+
+//                binding.imgstudentcard.setImageBitmap(bitmap);
 
 
 //                Picasso.with(this).load(resultUri).into(userpic);

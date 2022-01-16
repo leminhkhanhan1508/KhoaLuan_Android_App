@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/KhoaLuan/App_Android/app/app/src/main/res/layout/activity_camera_scan.xml" value="0.20416666666666666" />
+        <entry key="..\:/KhoaLuan/App_Android/app/app/src/main/res/layout/activity_camera_scan_connect.xml" value="0.1" />
+        <entry key="..\:/KhoaLuan/App_Android/app/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/KhoaLuan/App_Android/app/app/src/main/res/layout/activity_ocr.xml" value="0.2" />
+        <entry key="..\:/KhoaLuan/App_Android/app/app/src/main/res/layout/itemdialog_image_student.xml" value="0.20416666666666666" />
+        <entry key="..\:/KhoaLuan/App_Android/app/app/src/main/res/layout/itemdialogimage.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>

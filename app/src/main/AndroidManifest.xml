@@ -50,6 +50,16 @@
         <activity android:name=".Activity.CoursesActivity">
         </activity>
         <activity android:name=".Activity.LoginActivity">
+            <meta-data
+                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+                android:value="ocr"/>
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
         <activity android:name=".MainActivity">
 
@@ -57,15 +67,7 @@
 If you use the on-device API,
 configure your app to automatically download the ML model to the device after your app is installed from the Play Store.
             -->
-            <meta-data
-                    android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-                    android:value="ocr"/>
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <provider

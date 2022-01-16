@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.attendence.R;
 import com.google.android.gms.vision.barcode.Barcode;
-import info.androidhive.barcode.BarcodeReader;
+import info.bideens.barcode.BarcodeReader;
 
 import java.util.List;
 
@@ -73,6 +73,11 @@ public class CameraScanConnectDivice_Activity extends AppCompatActivity implemen
 
     @Override
     public void onScanError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCameraPermissionDenied() {
 
     }
 }
